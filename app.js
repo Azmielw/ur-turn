@@ -60,7 +60,7 @@ ar:{
  statsTitle:"آخر 7 أيام",sOrders:"طلب",sWait:"متوسط الانتظار (د)",sRating:"متوسط التقييم",sRatings:"تقييم",
  setupTitle:"التركيب بـ5 دقايق",
  su1:"الاسم والشعار",su2:"لون المحل",su3:"رابط تقييم جوجل",su4:"اطبع الستاند وحطه على الكاونتر",su5:"افتح شاشة الكاشير وجرّب طلب",
- adminTitle:"لوحة UR TURN",newShop:"محل جديد",slug:"معرّف الرابط (إنجليزي بدون مسافات)",slugPh:"مثلاً brew-lab",
+ adminTitle:"لوحة UR TURN",newShop:"محل جديد",slug:"اسم المحل بالرابط (أحرف إنجليزية وأرقام فقط)",slugPh:"مثلاً alhara",slugHint:"بيظهر بآخر رابط الزبون والـ QR: ",
  shopName:"اسم المحل",create:"إنشاء",created:"جاهز! هاي روابط المحل. رابط الكاشير والإعدادات بيظهروا مرة وحدة، احفظهم أو ابعثهم لصاحب المحل.",
  shops:"المحلات",colShop:"المحل",colSlug:"المعرّف",colOrders:"طلبات 7 أيام",colRating:"التقييم",newKey:"رابط كاشير جديد",
  badLink:"الرابط غير صحيح أو منتهي. اطلب رابط جديد.",noShop:"ما لقينا هذا المحل. تأكد من الكود.",
@@ -114,7 +114,7 @@ en:{
  statsTitle:"Last 7 days",sOrders:"orders",sWait:"avg wait (min)",sRating:"avg rating",sRatings:"ratings",
  setupTitle:"Set up in 5 minutes",
  su1:"Name and logo",su2:"Brand color",su3:"Google review link",su4:"Print the stand, put it on the counter",su5:"Open the cashier screen and test an order",
- adminTitle:"UR TURN admin",newShop:"New shop",slug:"Link id (letters, numbers, dashes)",slugPh:"e.g. brew-lab",
+ adminTitle:"UR TURN admin",newShop:"New shop",slug:"Shop name in the link (English letters and numbers)",slugPh:"e.g. alhara",slugHint:"Appears at the end of the customer link and QR: ",
  shopName:"Shop name",create:"Create",created:"Shop created. Save the links; the cashier link is shown once.",
  shops:"Shops",colShop:"Shop",colSlug:"Id",colOrders:"Orders 7d",colRating:"Rating",newKey:"New cashier link",
  badLink:"This link is invalid or expired. Ask for a new one.",noShop:"We couldn't find this shop. Check the code.",
@@ -387,7 +387,7 @@ function Admin(root,akey){
       <div class="panel"><div class="panel-head"><h2 data-title></h2><button class="btn small ghost" type="button" data-a="new" hidden>+ ${t("newShop")}</button></div>
         <form class="form" data-f="shop">
           <div class="field"><label for="a-name">${t("shopName")}</label><input type="text" id="a-name" required maxlength="80" style="${inputCss}"></div>
-          <div class="field" data-slugf><label for="a-slug">${t("slug")}</label><input type="text" id="a-slug" dir="ltr" pattern="[a-z0-9\\-]{2,40}" placeholder="${t("slugPh")}" style="${inputCss}"></div>
+          <div class="field" data-slugf><label for="a-slug">${t("slug")}</label><input type="text" id="a-slug" dir="ltr" pattern="[a-z0-9\\-]{2,40}" placeholder="${t("slugPh")}" style="${inputCss}"><small dir="auto">${t("slugHint")}<span dir="ltr" data-slugprev></span></small></div>
           <div class="field"><label>${t("fLogo")}</label><div class="logo-row"><div data-logo></div>
             <label class="btn small" for="a-logo" style="cursor:pointer">${t("upload")}</label><input type="file" id="a-logo" accept="image/*" hidden>
             <button type="button" class="btn small ghost" data-a="nologo">${t("removeLogo")}</button></div></div>
@@ -412,6 +412,7 @@ function Admin(root,akey){
     const name=draft.name||t("shopName");
     p.innerHTML=`${logoHTML({...draft,name},`style="color:${esc(draft.color)}"`)}<h3>${t("posterH")}</h3><div class="qr">${qrSVG(custURL(curSlug()))}</div><p>${t("posterP")}</p><b>${esc(name)}</b><span class="ur">UR TURN</span>`;
     $r("[data-logo]").innerHTML=logoHTML({...draft,name},`style="color:${esc(draft.color)}"`);
+    const sp=$r("[data-slugprev]"); if(sp) sp.textContent=custURL(curSlug());
     const cb=$r("[data-custbox]"); cb.hidden=!(mode==="edit"); $r("#a-cust").value=custURL(curSlug());
   }
   function fill(){
@@ -436,7 +437,11 @@ function Admin(root,akey){
         <td style="display:flex;gap:6px"><button class="btn small" data-edit="${esc(r.slug)}" type="button">${t("edit")}</button><button class="btn small ghost" data-reset="${esc(r.slug)}" type="button">${t("newKey")}</button></td></tr>`).join("");
     }catch(e){ root.innerHTML=`<div class="center-msg"><h2>${t("badLink")}</h2></div>`; }
   }
-  root.addEventListener("input",e=>{ if(["a-name","a-slug"].includes(e.target.id)){ read(); poster(); } if(e.target.id==="a-color"){ draft.color=e.target.value; swatches(); poster(); } });
+  let slugTouched=false;
+  root.addEventListener("input",e=>{
+    if(e.target.id==="a-slug"){ slugTouched=true; e.target.value=e.target.value.toLowerCase().replace(/[^a-z0-9-]/g,""); }
+    if(e.target.id==="a-name"&&mode==="new"&&!slugTouched){ const g=e.target.value.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,30); $r("#a-slug").value=g.length>=2?g:""; }
+    if(["a-name","a-slug"].includes(e.target.id)){ read(); poster(); } if(e.target.id==="a-color"){ draft.color=e.target.value; swatches(); poster(); } });
   root.addEventListener("change",e=>{
     if(e.target.id!=="a-logo"||!e.target.files[0]) return;
     const fr=new FileReader();
@@ -464,7 +469,7 @@ function Admin(root,akey){
     const sw=e.target.closest("[data-color]"); if(sw){ draft.color=sw.dataset.color; swatches(); poster(); return; }
     const a=e.target.closest("[data-a]");
     if(a&&a.dataset.a==="nologo"){ draft.logo=null; poster(); return; }
-    if(a&&a.dataset.a==="new"){ mode="new"; draft=blank(); $r("[data-result]").innerHTML=""; fill(); return; }
+    if(a&&a.dataset.a==="new"){ mode="new"; draft=blank(); slugTouched=false; $r("[data-result]").innerHTML=""; fill(); return; }
     const ed=e.target.closest("[data-edit]");
     if(ed){ const s=await loadShop(ed.dataset.edit); if(s){ draft={...s}; mode="edit"; $r("[data-result]").innerHTML=""; fill(); root.scrollIntoView({behavior:"smooth"}); } return; }
     const b=e.target.closest("[data-reset]"); if(!b) return;
