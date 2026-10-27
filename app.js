@@ -49,23 +49,23 @@ ar:{
  emptyWaiting:"ما في طلبات حالياً. لما الزبون يكتب رقم فاتورته بيظهر هون لحاله.",emptyReady:"ما في طلبات جاهزة.",
  since:(m)=> m<1?"الآن":("منذ "+m+" د"),fromCustomer:"سجّله الزبون",fromCashier:"أضافه الكاشير",
  readyFor:(m)=> m<1?"جاهز الآن":("جاهز منذ "+m+" د"),
- navCashier:"الكاشير",navOwner:"الإعدادات",
- ownerTitle:"إعدادات المحل",fName:"اسم المحل",fLogo:"الشعار",fLogoHint:"صورة مربعة أفضل.",
+ navCashier:"الكاشير",navOwner:"التقارير",
+ ownerTitle:"بيانات المحل",fName:"اسم المحل",fLogo:"الشعار",fLogoHint:"صورة مربعة أفضل.",
  upload:"رفع شعار",removeLogo:"إزالة",fColor:"لون المحل",
  fReview:"رابط تقييم جوجل",fReviewHint:"من Google Maps: صفحة المحل ← «اكتب مراجعة» ← انسخ الرابط.",
  fWelcome:"رسالة الترحيب (اختياري)",save:"حفظ",saved:"تم الحفظ ✓",demoLocked:"هذا محل تجريبي، الإعدادات مقفلة.",
  posterTitle:"ستاند الكاونتر",posterH:"امسح وانتظر دورك",posterP:"اكتب رقم فاتورتك وبنرن على جوالك لما يجهز طلبك",
- linksTitle:"الروابط",custLink:"رابط الزبون (هو نفسه الـ QR)",cashLink:"رابط شاشة الكاشير (سرّي)",ownLink:"رابط الإعدادات (سرّي)",
+ linksTitle:"الروابط",custLink:"رابط الزبون (هو نفسه الـ QR)",cashLink:"رابط شاشة الكاشير (سرّي)",ownLink:"رابط التقارير لصاحب المحل (سرّي)",
  copy:"نسخ",copied:"تم النسخ",
  statsTitle:"آخر 7 أيام",sOrders:"طلب",sWait:"متوسط الانتظار (د)",sRating:"متوسط التقييم",sRatings:"تقييم",
  setupTitle:"التركيب بـ5 دقايق",
  su1:"الاسم والشعار",su2:"لون المحل",su3:"رابط تقييم جوجل",su4:"اطبع الستاند وحطه على الكاونتر",su5:"افتح شاشة الكاشير وجرّب طلب",
  adminTitle:"لوحة UR TURN",newShop:"محل جديد",slug:"اسم المحل بالرابط (أحرف إنجليزية وأرقام فقط)",slugPh:"مثلاً alhara",slugHint:"بيظهر بآخر رابط الزبون والـ QR: ",
- shopName:"اسم المحل",create:"إنشاء",created:"جاهز! هاي روابط المحل. رابط الكاشير والإعدادات بيظهروا مرة وحدة، احفظهم أو ابعثهم لصاحب المحل.",
+ shopName:"اسم المحل",create:"إنشاء",created:"جاهز! هاي روابط المحل. رابط الكاشير والتقارير بيظهروا مرة وحدة، احفظهم أو ابعثهم لصاحب المحل.",
  shops:"المحلات",colShop:"المحل",colSlug:"المعرّف",colOrders:"طلبات 7 أيام",colRating:"التقييم",newKey:"رابط كاشير جديد",
  badLink:"الرابط غير صحيح أو منتهي. اطلب رابط جديد.",noShop:"ما لقينا هذا المحل. تأكد من الكود.",
  netErr:"في مشكلة بالاتصال، بنحاول مرة ثانية...",errGeneric:"صار خطأ، جرّب مرة ثانية.",
- badNumber:"اكتب أرقام بس.",editShop:"تعديل",edit:"تعديل",customColor:"أو اختار أي لون:",slugTaken:"هذا المعرّف مستخدم، اختار غيره."
+ badNumber:"اكتب أرقام بس.",contactToEdit:"لتعديل الاسم أو الشعار أو اللون أو رابط جوجل، تواصل مع فريق UR TURN.",editShop:"تعديل",edit:"تعديل",customColor:"أو اختار أي لون:",slugTaken:"هذا المعرّف مستخدم، اختار غيره."
 },
 en:{
  tabHome:"Home",tabDemo:"Live demo",
@@ -103,13 +103,13 @@ en:{
  emptyWaiting:"No orders yet. They appear here by themselves when a customer enters a receipt number.",emptyReady:"No ready orders.",
  since:(m)=> m<1?"just now":(m+" min ago"),fromCustomer:"added by customer",fromCashier:"added by cashier",
  readyFor:(m)=> m<1?"ready now":("ready "+m+" min"),
- navCashier:"Cashier",navOwner:"Settings",
- ownerTitle:"Shop settings",fName:"Shop name",fLogo:"Logo",fLogoHint:"Square works best.",
+ navCashier:"Cashier",navOwner:"Reports",
+ ownerTitle:"Shop details",fName:"Shop name",fLogo:"Logo",fLogoHint:"Square works best.",
  upload:"Upload logo",removeLogo:"Remove",fColor:"Brand color",
  fReview:"Google review link",fReviewHint:"From Google Maps: shop page → “Write a review” → copy the link.",
  fWelcome:"Welcome message (optional)",save:"Save",saved:"Saved ✓",demoLocked:"This is a demo shop; settings are locked.",
  posterTitle:"Counter stand",posterH:"Scan & wait for your turn",posterP:"Enter your receipt number and we'll ring your phone when it's ready",
- linksTitle:"Links",custLink:"Customer link (same as the QR)",cashLink:"Cashier screen link (private)",ownLink:"Settings link (private)",
+ linksTitle:"Links",custLink:"Customer link (same as the QR)",cashLink:"Cashier screen link (private)",ownLink:"Owner reports link (private)",
  copy:"Copy",copied:"Copied",
  statsTitle:"Last 7 days",sOrders:"orders",sWait:"avg wait (min)",sRating:"avg rating",sRatings:"ratings",
  setupTitle:"Set up in 5 minutes",
@@ -119,7 +119,7 @@ en:{
  shops:"Shops",colShop:"Shop",colSlug:"Id",colOrders:"Orders 7d",colRating:"Rating",newKey:"New cashier link",
  badLink:"This link is invalid or expired. Ask for a new one.",noShop:"We couldn't find this shop. Check the code.",
  netErr:"Connection problem, retrying...",errGeneric:"Something went wrong, try again.",
- badNumber:"Numbers only.",editShop:"Edit",edit:"Edit",customColor:"Or pick any color:",slugTaken:"That id is taken, pick another."
+ badNumber:"Numbers only.",contactToEdit:"To change the name, logo, color or Google link, contact the UR TURN team.",editShop:"Edit",edit:"Edit",customColor:"Or pick any color:",slugTaken:"That id is taken, pick another."
 }};
 let lang="ar"; try{ lang=localStorage.getItem("urturn.lang")||"ar"; }catch(e){}
 const t=(k,...a)=>{ const v=(T[lang]||T.ar)[k]; return typeof v==="function"? v(...a) : (v ?? k); };
@@ -305,47 +305,31 @@ function Cashier(root,store,key){
   return {render};
 }
 
-// ---------- owner ----------
+// ---------- owner (read-only reports) ----------
 function Owner(root,store,key){
-  const COLORS=["#0E5E5A","#7A2E1F","#1E3A8A","#3F3A33","#8A1C4A","#2F6B2A","#B45309","#14181C"];
-  let draft={...store.shop};
-  const slug=draft.slug, locked=slug===DEMO_SLUG;
-  const sw=()=>COLORS.map(c=>`<button type="button" class="swatch" style="background:${c}" data-color="${c}" aria-label="${c}" aria-pressed="${draft.color===c}"></button>`).join("");
+  const shop=store.shop, slug=shop.slug;
   root.innerHTML=`<div class="wrap owner">
     <div style="display:grid;gap:16px;min-width:0">
-      <div class="panel"><div class="panel-head"><h2>${t("statsTitle")}</h2></div><div class="stats four" data-stats>
+      <div class="panel"><div class="panel-head"><h2>${t("statsTitle")}</h2></div><div class="stats four">
         <div class="stat"><b data-k="n">–</b><span>${t("sOrders")}</span></div><div class="stat"><b data-k="w">–</b><span>${t("sWait")}</span></div>
         <div class="stat"><b data-k="r">–</b><span>${t("sRating")}</span></div><div class="stat"><b data-k="c">–</b><span>${t("sRatings")}</span></div></div></div>
       <div class="panel"><div class="panel-head"><h2>${t("ownerTitle")}</h2></div>
-      ${locked?`<div class="tip" style="margin-bottom:12px">${t("demoLocked")}</div>`:""}
-      <form class="form" data-f="owner">
-        <div class="field"><label for="o-name">${t("fName")}</label><input type="text" id="o-name" value="${esc(draft.name)}" maxlength="80"></div>
-        <div class="field"><label>${t("fLogo")}</label><div class="logo-row"><div data-logo>${logoHTML(draft)}</div>
-          <label class="btn small" for="o-logo" style="cursor:pointer">${t("upload")}</label><input type="file" id="o-logo" accept="image/*" hidden>
-          <button type="button" class="btn small ghost" data-a="nologo">${t("removeLogo")}</button></div><small>${t("fLogoHint")}</small></div>
-        <div class="field"><label>${t("fColor")}</label><div class="swatches" data-sw>${sw()}</div>
-          <label style="display:flex;gap:8px;align-items:center;font-weight:500;font-size:14px">${t("customColor")} <input type="color" id="o-color" value="${esc(draft.color)}" style="width:44px;height:34px;border:0;background:none;padding:0"></label></div>
-        <div class="field"><label for="o-review">${t("fReview")}</label><input type="url" id="o-review" dir="ltr" value="${esc(draft.review_url||"")}"><small>${t("fReviewHint")}</small></div>
-        <div class="field"><label for="o-welcome">${t("fWelcome")}</label><input type="text" id="o-welcome" maxlength="280" value="${esc(draft.welcome||"")}" placeholder="${esc(t("welcome"))}"></div>
-        <div style="display:flex;gap:12px;align-items:center"><button class="btn primary" type="submit" ${locked?"disabled":""}>${t("save")}</button><span class="saved" data-saved hidden>${t("saved")}</span></div>
-      </form></div>
-      <div class="panel"><div class="panel-head"><h2>${t("setupTitle")}</h2><span class="chip">⏱ 5:00</span></div>
-        <ol class="setup">${[1,2,3,4,5].map(i=>`<li><span>${t("su"+i)}</span></li>`).join("")}</ol></div>
+        <div class="list" style="display:grid;gap:10px">
+          <div><small style="color:var(--muted)">${t("fName")}</small><div style="font-weight:600">${esc(shop.name)}</div></div>
+          <div><small style="color:var(--muted)">${t("fReview")}</small><div dir="ltr" style="word-break:break-all">${shop.review_url?`<a href="${esc(shop.review_url)}" target="_blank" rel="noopener">${esc(shop.review_url)}</a>`:"–"}</div></div>
+          <div class="tip">${t("contactToEdit")}</div>
+        </div></div>
     </div>
     <div style="display:grid;gap:16px;align-content:start">
       <div><div class="label">${t("posterTitle")}</div><div class="poster" data-poster></div></div>
-      <div class="panel links"><h2 style="font-size:18px">${t("linksTitle")}</h2>
-        ${[["custLink",custURL(slug)],["cashLink",cashURL(slug,key)],["ownLink",ownURL(slug,key)]].map(([l,u],i)=>`<div><label>${t(l)}</label><div class="copy-row"><input id="lk${i}" readonly value="${esc(u)}"><button class="btn small" type="button" data-copy="lk${i}">${t("copy")}</button></div></div>`).join("")}
-      </div>
+      <div class="panel links"><label>${t("custLink")}</label><div class="copy-row"><input id="lk0" readonly value="${esc(custURL(slug))}"><button class="btn small" type="button" data-copy="lk0">${t("copy")}</button></div></div>
     </div></div>`;
-  root.querySelectorAll("[data-copy]").forEach(b=>copyBtn(b,root.querySelector("#"+b.dataset.copy)));
-  function poster(){
-    const p=root.querySelector("[data-poster]"); p.style.setProperty("--shop",draft.color); p.style.setProperty("--shop-ink",inkFor(draft.color));
-    p.innerHTML=`${logoHTML(draft,`style="color:${esc(draft.color)}"`)}<h3>${t("posterH")}</h3><div class="qr">${qrSVG(custURL(slug))}</div><p>${t("posterP")}</p><b>${esc(draft.name)}</b><span class="ur">UR TURN</span>`;
-  }
+  copyBtn(root.querySelector("[data-copy]"),root.querySelector("#lk0"));
+  const p=root.querySelector("[data-poster]");
+  p.innerHTML=`${logoHTML(shop,`style="color:${esc(shop.color)}"`)}<h3>${t("posterH")}</h3><div class="qr">${qrSVG(custURL(slug))}</div><p>${t("posterP")}</p><b>${esc(shop.name)}</b><span class="ur">UR TURN</span>`;
   async function stats(){
     try{
-      const rows=await Api.week(store.shop.id);
+      const rows=await Api.week(shop.id);
       const waits=rows.filter(o=>o.ready_at).map(o=>(new Date(o.ready_at)-new Date(o.created_at))/60000);
       const rates=rows.filter(o=>o.rating).map(o=>o.rating);
       const q=k=>root.querySelector(`[data-k="${k}"]`);
@@ -353,27 +337,7 @@ function Owner(root,store,key){
       q("r").textContent=rates.length?(rates.reduce((a,b)=>a+b,0)/rates.length).toFixed(1):"–"; q("c").textContent=rates.length;
     }catch(e){}
   }
-  function readForm(){ draft.name=root.querySelector("#o-name").value.trim()||draft.name; draft.review_url=root.querySelector("#o-review").value.trim(); draft.welcome=root.querySelector("#o-welcome").value.trim(); }
-  poster(); stats(); setInterval(stats,60000);
-  root.addEventListener("input",e=>{ if(e.target.id==="o-name"){ readForm(); poster(); } if(e.target.id==="o-color"){ draft.color=e.target.value; root.querySelector("[data-sw]").innerHTML=sw(); poster(); applyShop(draft); } });
-  root.addEventListener("change",e=>{
-    if(e.target.id!=="o-logo"||!e.target.files[0]) return;
-    const fr=new FileReader();
-    fr.onload=()=>{ const img=new Image(); img.onload=()=>{ const c=document.createElement("canvas"),S=200; c.width=S;c.height=S; const x=c.getContext("2d"); const m=Math.min(img.width,img.height);
-      x.fillStyle="#fff"; x.fillRect(0,0,S,S); x.drawImage(img,(img.width-m)/2,(img.height-m)/2,m,m,0,0,S,S); draft.logo=c.toDataURL("image/jpeg",0.85);
-      root.querySelector("[data-logo]").innerHTML=logoHTML(draft); poster(); }; img.src=fr.result; };
-    fr.readAsDataURL(e.target.files[0]);
-  });
-  root.addEventListener("click",e=>{
-    const s=e.target.closest("[data-color]"); if(s){ draft.color=s.dataset.color; root.querySelector("[data-sw]").innerHTML=sw(); poster(); applyShop(draft); return; }
-    const a=e.target.closest("[data-a]"); if(a&&a.dataset.a==="nologo"){ draft.logo=null; root.querySelector("[data-logo]").innerHTML=logoHTML(draft); poster(); }
-  });
-  root.addEventListener("submit",async e=>{
-    e.preventDefault(); if(locked) return; readForm();
-    try{ await rpc("urturn_save_shop",{p_slug:slug,p_key:key,p_name:draft.name,p_color:draft.color,p_logo:draft.logo||"",p_review_url:draft.review_url||"",p_welcome:draft.welcome||""});
-      const el=root.querySelector("[data-saved]"); el.hidden=false; setTimeout(()=>el.hidden=true,2500); store.refresh(); }
-    catch(err){ toast(t("errGeneric")); }
-  });
+  stats(); setInterval(stats,60000);
 }
 
 // ---------- admin ----------
