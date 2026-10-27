@@ -203,3 +203,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .offline{background:var(--warn-bg);font-size:13px;padding:6px 12px;text-align:center}
 
 [hidden]{display:none!important}
+/* subscriptions */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}
+.plan{border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:6px;justify-items:start}
+.plan .price{font-family:var(--display);font-size:22px;font-weight:700}
+.plan .price small{font-size:13px;font-weight:500}
+.subbar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-radius:14px;padding:12px 14px;font-weight:500}
+.subbar.ok{background:var(--bg);border:1px solid var(--line)}
+.subbar.soon{background:var(--warn-bg)}
+.subbar.ended{background:#B42318;color:#fff}
+.dl{font-weight:700}.dl.good{color:#2F6B2A}.dl.warn{color:#B45309}.dl.bad{color:#B42318}
+.order.late{border-color:#B42318}
+.tbl td{vertical-align:top}

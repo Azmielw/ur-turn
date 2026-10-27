@@ -65,7 +65,20 @@ ar:{
  shops:"المحلات",colShop:"المحل",colSlug:"المعرّف",colOrders:"طلبات 7 أيام",colRating:"التقييم",newKey:"رابط كاشير جديد",
  badLink:"الرابط غير صحيح أو منتهي. اطلب رابط جديد.",noShop:"ما لقينا هذا المحل. تأكد من الكود.",
  netErr:"في مشكلة بالاتصال، بنحاول مرة ثانية...",errGeneric:"صار خطأ، جرّب مرة ثانية.",
- badNumber:"اكتب أرقام بس.",contactToEdit:"لتعديل الاسم أو الشعار أو اللون أو رابط جوجل، تواصل مع فريق UR TURN.",editShop:"تعديل",edit:"تعديل",customColor:"أو اختار أي لون:",slugTaken:"هذا المعرّف مستخدم، اختار غيره."
+ badNumber:"اكتب أرقام بس.",contactToEdit:"لتعديل الاسم أو الشعار أو اللون أو رابط جوجل، تواصل مع فريق UR TURN.",editShop:"تعديل",edit:"تعديل",customColor:"أو اختار أي لون:",slugTaken:"هذا المعرّف مستخدم، اختار غيره.",
+ subTitle:"الاشتراك",plan_trial:"تجربة مجانية (7 أيام)",plan_m1:"شهري",plan_m3:"3 شهور",plan_m12:"سنوي",plan_demo:"عرض تجريبي",
+ egp:"ج.م",month:"شهر",daysLeft:d=>`باقي ${d} يوم`,expired:"منتهي",until:"لغاية",
+ renew:"تجديد",renewNow:"جدّد الاشتراك",saveOnly:"حفظ بدون تجديد",shopWa:"واتساب المحل أو صاحبه",shopWaPh:"مثلاً 01012345678",
+ notes:"ملاحظات (مثلاً: استلم الستاند)",archive:"أرشفة",restore:"استرجاع",archived:"مؤرشف",confirmArchive:n=>`أرشفة "${n}"؟ رح يوقف عندهم النظام، وبتقدر ترجّعه بأي وقت.`,
+ alertsTitle:"تنبيهات التجديد",noAlerts:"ما في اشتراكات قربت تخلص.",sendWa:"ابعت واتساب",noWa:"ما في رقم واتساب",
+ colSub:"الاشتراك",renewed:d=>`تم التجديد لغاية ${d} ✓`,standGift:"ستاند QR هدية مع كل اشتراك",save2:n=>`وفّر ${n} ج.م`,
+ offersTitle:"باقات الاشتراك",
+ subOk:(d,dt)=>`اشتراكك فعّال، باقي ${d} يوم (لغاية ${dt}).`,subSoon:d=>d<=0?"اشتراكك بيخلص اليوم. للتجديد تواصل معنا.":`اشتراكك بيخلص بعد ${d} يوم. للتجديد تواصل معنا.`,
+ subEnded:"انتهى اشتراك UR TURN وتوقف النظام مؤقتاً. للتجديد تواصل معنا على واتساب ومنرجّعه فوراً.",contactWa:"تواصل معنا واتساب",
+ custPaused:"الخدمة متوقفة مؤقتاً. اسأل الكاشير عن طلبك.",
+ waSoon:(n,d,dt)=>`أهلاً ${n} 👋\nحابين نفكّركم إن اشتراك UR TURN عندكم بيخلص بعد ${d} يوم (${dt}).\nعشان يفضل النظام شغال بدون توقف، رد علينا هنا ومنجدّد لكم بدقيقة.\nشكراً لثقتكم ☕`,
+ waEnded:n=>`أهلاً ${n} 👋\nاشتراك UR TURN عندكم خلص، والنظام توقف مؤقتاً.\nللتجديد تواصل معنا هنا على الواتساب، ومنرجّع كل اشي شغال فوراً.\nمستنيينكم ☕`,
+ waRenew:"مرحبا، بدي أجدد اشتراك UR TURN لمحل: "
 },
 en:{
  tabHome:"Home",tabDemo:"Live demo",
@@ -119,7 +132,20 @@ en:{
  shops:"Shops",colShop:"Shop",colSlug:"Id",colOrders:"Orders 7d",colRating:"Rating",newKey:"New cashier link",
  badLink:"This link is invalid or expired. Ask for a new one.",noShop:"We couldn't find this shop. Check the code.",
  netErr:"Connection problem, retrying...",errGeneric:"Something went wrong, try again.",
- badNumber:"Numbers only.",contactToEdit:"To change the name, logo, color or Google link, contact the UR TURN team.",editShop:"Edit",edit:"Edit",customColor:"Or pick any color:",slugTaken:"That id is taken, pick another."
+ badNumber:"Numbers only.",contactToEdit:"To change the name, logo, color or Google link, contact the UR TURN team.",editShop:"Edit",edit:"Edit",customColor:"Or pick any color:",slugTaken:"That id is taken, pick another.",
+ subTitle:"Subscription",plan_trial:"Free trial (7 days)",plan_m1:"Monthly",plan_m3:"3 months",plan_m12:"Yearly",plan_demo:"Demo",
+ egp:"EGP",month:"month",daysLeft:d=>`${d} days left`,expired:"Expired",until:"until",
+ renew:"Renew",renewNow:"Renew subscription",saveOnly:"Save without renewing",shopWa:"Shop / owner WhatsApp",shopWaPh:"e.g. 01012345678",
+ notes:"Notes (e.g. got the stand)",archive:"Archive",restore:"Restore",archived:"Archived",confirmArchive:n=>`Archive "${n}"? Their system stops; you can restore it any time.`,
+ alertsTitle:"Renewal alerts",noAlerts:"No subscriptions ending soon.",sendWa:"Send WhatsApp",noWa:"No WhatsApp number",
+ colSub:"Subscription",renewed:d=>`Renewed until ${d} ✓`,standGift:"Free QR stand with every plan",save2:n=>`Save ${n} EGP`,
+ offersTitle:"Plans",
+ subOk:(d,dt)=>`Subscription active, ${d} days left (until ${dt}).`,subSoon:d=>d<=0?"Your subscription ends today. Contact us to renew.":`Your subscription ends in ${d} days. Contact us to renew.`,
+ subEnded:"Your UR TURN subscription has ended and the system is paused. Contact us on WhatsApp to renew and we'll turn it back on right away.",contactWa:"Contact us on WhatsApp",
+ custPaused:"Service is paused. Please ask the cashier about your order.",
+ waSoon:(n,d,dt)=>`Hi ${n} 👋\nA friendly reminder that your UR TURN subscription ends in ${d} days (${dt}).\nReply here and we'll renew it in a minute.\nThank you ☕`,
+ waEnded:n=>`Hi ${n} 👋\nYour UR TURN subscription has ended and the system is paused.\nTo renew, just reply here on WhatsApp and we'll turn everything back on right away.\nThank you ☕`,
+ waRenew:"Hi, I'd like to renew UR TURN for: "
 }};
 let lang="ar"; try{ lang=localStorage.getItem("urturn.lang")||"ar"; }catch(e){}
 const t=(k,...a)=>{ const v=(T[lang]||T.ar)[k]; return typeof v==="function"? v(...a) : (v ?? k); };
@@ -173,6 +199,28 @@ const Ring={ ctx:null,timer:null,on:false,
 let wakeLock=null;
 async function keepAwake(){ try{ if(navigator.wakeLock&&(!wakeLock||wakeLock.released)) wakeLock=await navigator.wakeLock.request("screen"); }catch(e){} }
 document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible") keepAwake(); });
+
+
+// ---------- subscriptions ----------
+// Prices in EGP. Change them here.
+const PLANS={ m1:{months:1,price:450}, m3:{months:3,price:1200}, m12:{months:12,price:4500} };
+const daysLeft=ts=>Math.ceil((new Date(ts).getTime()-Date.now())/864e5);
+const fmtDate=ts=>new Date(ts).toLocaleDateString(lang==="ar"?"ar-EG":"en-GB",{day:"numeric",month:"long",year:"numeric"});
+function waNum(n){ let d=String(n||"").replace(/\D/g,""); if(d.startsWith("00")) d=d.slice(2); if(/^01\d{9}$/.test(d)) d="2"+d; return d; }
+const waLink=(n,text)=>"https://wa.me/"+waNum(n)+(text?"?text="+encodeURIComponent(text):"");
+function plansHTML(){
+  return `<div class="plans">${Object.entries(PLANS).map(([k,p])=>{ const full=PLANS.m1.price*p.months, sv=full-p.price;
+    return `<div class="plan"><b>${t("plan_"+k)}</b><div class="price">${p.price.toLocaleString()} <small>${t("egp")}</small></div>${sv>0?`<span class="pill">${t("save2",sv.toLocaleString())}</span>`:""}</div>`; }).join("")}</div>
+    <div class="tip" style="margin-top:10px">🎁 ${t("standGift")}</div>`;
+}
+function subBanner(st,shop,always){
+  if(!st||!st.ends_at||st.plan==="demo") return "";
+  const d=daysLeft(st.ends_at), wa=st.whatsapp?waLink(st.whatsapp,t("waRenew")+shop.name):"";
+  const btn=wa?`<a class="btn small signal" href="${esc(wa)}" target="_blank" rel="noopener">${t("contactWa")}</a>`:"";
+  if(st.locked) return `<div class="subbar ended"><span>${t("subEnded")}</span>${btn}</div>`;
+  if(d<=7) return `<div class="subbar soon"><span>${t("subSoon",d)}</span>${btn}</div>`;
+  return always?`<div class="subbar ok"><span>${t("subOk",d,fmtDate(st.ends_at))}</span></div>`:"";
+}
 
 // ---------- shop store (polling) ----------
 function ShopStore(shop){
@@ -244,7 +292,7 @@ function Customer(root,shop,opts){
     Ring.unlock(); keepAwake(); rated=0;
     const btn=root.querySelector("button[type=submit]"); btn.disabled=true;
     try{ const id=await rpc("urturn_create_order",{p_slug:shop.slug,p_num:v}); setOrder(id); await poll(); }
-    catch(err){ toast(t("errGeneric")); btn.disabled=false; }
+    catch(err){ toast(String(err.code||"").includes("subscription")?t("custPaused"):t("errGeneric")); btn.disabled=false; }
   });
   root.addEventListener("click",async e=>{
     const st=e.target.closest("[data-star]"); if(st){ rated=+st.dataset.star; render(); if(orderId) rpc("urturn_rate",{p_id:orderId,p_rating:rated}).catch(()=>{}); return; }
@@ -321,6 +369,7 @@ function Owner(root,store,key){
         </div></div>
     </div>
     <div style="display:grid;gap:16px;align-content:start">
+      <div class="panel"><div class="panel-head"><h2>${t("offersTitle")}</h2></div>${plansHTML()}</div>
       <div><div class="label">${t("posterTitle")}</div><div class="poster" data-poster></div></div>
       <div class="panel links"><label>${t("custLink")}</label><div class="copy-row"><input id="lk0" readonly value="${esc(custURL(slug))}"><button class="btn small" type="button" data-copy="lk0">${t("copy")}</button></div></div>
     </div></div>`;
@@ -348,6 +397,15 @@ function Admin(root,akey){
   const inputCss="border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg);width:100%";
   root.innerHTML=`<div class="wrap owner">
     <div style="display:grid;gap:16px;min-width:0">
+      <div class="panel"><div class="panel-head"><h2>🔔 ${t("alertsTitle")}</h2></div><div data-alerts></div></div>
+      <div class="panel" data-subpanel hidden><div class="panel-head"><h2 data-subtitle></h2></div>
+        <form class="form" data-f="sub">
+          <div class="field"><label for="s-wa">${t("shopWa")}</label><input type="tel" id="s-wa" dir="ltr" placeholder="${t("shopWaPh")}" style="${inputCss}"></div>
+          <div class="field"><label for="s-plan">${t("renew")}</label><select id="s-plan" style="${inputCss}">${Object.entries(PLANS).map(([k,p])=>`<option value="${k}">${t("plan_"+k)} · ${p.price.toLocaleString()} ${t("egp")}</option>`).join("")}<option value="trial">${t("plan_trial")}</option></select></div>
+          <div class="field"><label for="s-notes">${t("notes")}</label><input type="text" id="s-notes" maxlength="400" style="${inputCss}"></div>
+          <div data-subinfo class="tip"></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn primary" type="submit">${t("renewNow")}</button><button class="btn ghost" type="button" data-a="subsave">${t("saveOnly")}</button></div>
+        </form></div>
       <div class="panel"><div class="panel-head"><h2 data-title></h2><button class="btn small ghost" type="button" data-a="new" hidden>+ ${t("newShop")}</button></div>
         <form class="form" data-f="shop">
           <div class="field"><label for="a-name">${t("shopName")}</label><input type="text" id="a-name" required maxlength="80" style="${inputCss}"></div>
@@ -362,9 +420,9 @@ function Admin(root,akey){
           <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn primary" type="submit" data-submit></button><span class="saved" data-saved hidden>${t("saved")}</span></div>
         </form>
         <div data-result></div></div>
-      <div class="panel"><div class="panel-head"><h2>${t("shops")}</h2></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>${t("colShop")}</th><th>${t("colSlug")}</th><th>${t("colOrders")}</th><th>${t("colRating")}</th><th></th></tr></thead><tbody data-rows></tbody></table></div></div>
+      <div class="panel"><div class="panel-head"><h2>${t("shops")}</h2></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>${t("colShop")}</th><th>${t("colSlug")}</th><th>${t("colSub")}</th><th>${t("colOrders")}</th><th>${t("colRating")}</th><th></th></tr></thead><tbody data-rows></tbody></table></div></div>
     </div>
-    <div style="display:grid;gap:16px;align-content:start"><div><div class="label">${t("posterTitle")}</div><div class="poster" data-poster></div></div>
+    <div style="display:grid;gap:16px;align-content:start"><div class="panel"><div class="panel-head"><h2>${t("offersTitle")}</h2></div>${plansHTML()}</div><div><div class="label">${t("posterTitle")}</div><div class="poster" data-poster></div></div>
       <div class="panel links" data-custbox hidden><label>${t("custLink")}</label><div class="copy-row"><input id="a-cust" readonly><button class="btn small" type="button" data-copy="a-cust">${t("copy")}</button></div></div></div>
   </div>`;
   const $r=s=>root.querySelector(s);
@@ -395,11 +453,39 @@ function Admin(root,akey){
     box.querySelectorAll("[data-copy2]").forEach(b=>copyBtn(b,box.querySelector("#"+b.dataset.copy2)));
     box.scrollIntoView({behavior:"smooth",block:"center"});
   }
+  let rowsCache=[], subSlug=null;
+  function subCell(r){
+    if(!r.active) return `<span class="pill">${t("archived")}</span>`;
+    if(!r.ends_at||r.plan==="demo") return t("plan_demo");
+    const d=daysLeft(r.ends_at), cls=d<=0?"bad":d<=7?"warn":"good";
+    return `<span class="dl ${cls}">${d<=0?t("expired"):t("daysLeft",d)}</span><br><small>${t("plan_"+r.plan)} · ${fmtDate(r.ends_at)}</small>`;
+  }
+  function waMsg(r){ const d=daysLeft(r.ends_at); return d<=0?t("waEnded",r.name):t("waSoon",r.name,d,fmtDate(r.ends_at)); }
+  function waBtn(r){ return r.whatsapp?`<a class="btn small signal" href="${esc(waLink(r.whatsapp,waMsg(r)))}" target="_blank" rel="noopener">${t("sendWa")}</a>`:`<small style="color:var(--muted)">${t("noWa")}</small>`; }
   async function load(){
-    try{ const rows=await rpc("urturn_admin_shops",{p_admin:akey});
-      $r("[data-rows]").innerHTML=rows.map(r=>`<tr><td>${esc(r.name)}</td><td dir="ltr"><a href="${esc(custURL(r.slug))}" target="_blank" rel="noopener">${esc(r.slug)}</a></td><td>${r.orders_7d}</td><td>${r.avg_rating??"–"}</td>
-        <td style="display:flex;gap:6px"><button class="btn small" data-edit="${esc(r.slug)}" type="button">${t("edit")}</button><button class="btn small ghost" data-reset="${esc(r.slug)}" type="button">${t("newKey")}</button></td></tr>`).join("");
+    try{ const rows=rowsCache=await rpc("urturn_admin_shops2",{p_admin:akey});
+      $r("[data-rows]").innerHTML=rows.map(r=>`<tr${r.active?"":' style="opacity:.55"'}><td>${esc(r.name)}</td><td dir="ltr"><a href="${esc(custURL(r.slug))}" target="_blank" rel="noopener">${esc(r.slug)}</a></td><td>${subCell(r)}</td><td>${r.orders_7d}</td><td>${r.avg_rating??"–"}</td>
+        <td><div style="display:flex;gap:6px;flex-wrap:wrap">${r.slug===DEMO_SLUG?"":`<button class="btn small primary" data-sub="${esc(r.slug)}" type="button">${t("renew")}</button>`}<button class="btn small" data-edit="${esc(r.slug)}" type="button">${t("edit")}</button><button class="btn small ghost" data-reset="${esc(r.slug)}" type="button">${t("newKey")}</button>${r.slug===DEMO_SLUG?"":`<button class="btn small ghost" data-arch="${esc(r.slug)}" data-on="${r.active?0:1}" type="button">${r.active?t("archive"):t("restore")}</button>`}</div></td></tr>`).join("");
+      const al=rows.filter(r=>r.active&&r.ends_at&&r.plan!=="demo"&&daysLeft(r.ends_at)<=3);
+      $r("[data-alerts]").innerHTML=al.length?`<div class="orders">${al.map(r=>`<div class="order${daysLeft(r.ends_at)<=0?" late":""}"><div style="font-weight:600">${esc(r.name)}</div><div class="meta">${subCell(r)}</div><div class="acts">${waBtn(r)}<button class="btn small primary" data-sub="${esc(r.slug)}" type="button">${t("renew")}</button></div></div>`).join("")}</div>`:`<div class="empty">${t("noAlerts")}</div>`;
     }catch(e){ root.innerHTML=`<div class="center-msg"><h2>${t("badLink")}</h2></div>`; }
+  }
+  function openSub(slug){
+    const r=rowsCache.find(x=>x.slug===slug); if(!r) return; subSlug=slug;
+    const p=$r("[data-subpanel]"); p.hidden=false;
+    $r("[data-subtitle]").textContent=t("subTitle")+": "+r.name;
+    $r("#s-wa").value=r.whatsapp||""; $r("#s-notes").value=r.notes||""; $r("#s-plan").value="m1";
+    $r("[data-subinfo]").innerHTML=r.ends_at?subCell(r)+(r.whatsapp?" "+waBtn(r):""):"";
+    p.scrollIntoView({behavior:"smooth",block:"center"});
+  }
+  async function saveSub(renew){
+    const r=rowsCache.find(x=>x.slug===subSlug); if(!r) return;
+    let plan=r.plan||"trial", ends=new Date(r.ends_at||Date.now());
+    if(renew){ plan=$r("#s-plan").value; const base=new Date(Math.max(Date.now(),ends.getTime()));
+      if(plan==="trial") base.setDate(base.getDate()+7); else base.setMonth(base.getMonth()+PLANS[plan].months); ends=base; }
+    try{ await rpc("urturn_admin_set_sub",{p_admin:akey,p_slug:subSlug,p_plan:plan,p_ends_at:ends.toISOString(),p_whatsapp:$r("#s-wa").value,p_notes:$r("#s-notes").value});
+      toast(renew?t("renewed",fmtDate(ends)):t("saved")); await load(); openSub(subSlug);
+    }catch(err){ toast(t("errGeneric")); }
   }
   let slugTouched=false;
   root.addEventListener("input",e=>{
@@ -414,7 +500,9 @@ function Admin(root,akey){
     fr.readAsDataURL(e.target.files[0]);
   });
   root.addEventListener("submit",async e=>{
-    e.preventDefault(); read();
+    e.preventDefault();
+    if(e.target.dataset.f==="sub"){ saveSub(true); return; }
+    read();
     const args={p_admin:akey,p_name:draft.name,p_color:draft.color,p_logo:draft.logo||"",p_review_url:draft.review_url||"",p_welcome:draft.welcome||""};
     try{
       if(mode==="new"){
@@ -422,6 +510,7 @@ function Admin(root,akey){
         const k=await rpc("urturn_admin_create_shop",{p_admin:akey,p_slug:slug,p_name:draft.name});
         await rpc("urturn_admin_save_shop",{...args,p_slug:slug});
         draft.slug=slug; mode="edit"; fill(); showLinks(slug,k);
+        await load(); openSub(slug); return;
       } else {
         await rpc("urturn_admin_save_shop",{...args,p_slug:draft.slug});
         const s=$r("[data-saved]"); s.hidden=false; setTimeout(()=>s.hidden=true,2500); fill();
@@ -432,6 +521,12 @@ function Admin(root,akey){
   root.addEventListener("click",async e=>{
     const sw=e.target.closest("[data-color]"); if(sw){ draft.color=sw.dataset.color; swatches(); poster(); return; }
     const a=e.target.closest("[data-a]");
+    if(a&&a.dataset.a==="subsave"){ saveSub(false); return; }
+    const sb=e.target.closest("[data-sub]"); if(sb){ await load(); openSub(sb.dataset.sub); return; }
+    const ar=e.target.closest("[data-arch]");
+    if(ar){ const on=ar.dataset.on==="1"; const r=rowsCache.find(x=>x.slug===ar.dataset.arch);
+      if(!on&&!confirm(t("confirmArchive",r?r.name:ar.dataset.arch))) return;
+      try{ await rpc("urturn_admin_set_active",{p_admin:akey,p_slug:ar.dataset.arch,p_active:on}); load(); }catch(err){ toast(t("errGeneric")); } return; }
     if(a&&a.dataset.a==="nologo"){ draft.logo=null; poster(); return; }
     if(a&&a.dataset.a==="new"){ mode="new"; draft=blank(); slugTouched=false; $r("[data-result]").innerHTML=""; fill(); return; }
     const ed=e.target.closest("[data-edit]");
@@ -484,8 +579,9 @@ async function demoPage(){
 async function customerPage(){
   const shop=await loadShop(SLUG);
   if(shop===undefined){ msg(t("netErr")); setTimeout(customerPage,4000); return; }
-  if(!shop){ msg(t("noShop")); return; }
+  if(!shop||!shop.active){ msg(t("noShop")); return; }
   applyShop(shop); document.title=shop.name+" · UR TURN";
+  try{ const ps=await rpc("urturn_public_status",{p_slug:SLUG}); if(ps&&ps.locked){ msg(t("custPaused")); return; } }catch(e){}
   app.innerHTML=`<div class="cust-full" id="fullCust"></div>`;
   Customer($("#fullCust"),shop,{});
 }
@@ -493,11 +589,14 @@ async function staffPage(kind){
   const shop=await loadShop(SLUG);
   if(shop===undefined){ msg(t("netErr")); return; }
   let ok=false; try{ ok=shop && await rpc("urturn_staff_check",{p_slug:SLUG,p_key:KEY}); }catch(e){}
-  if(!ok){ msg(t("badLink")); return; }
+  if(!ok||!shop.active){ msg(t("badLink")); return; }
   applyShop(shop); document.title=shop.name+" · UR TURN";
   const store=ShopStore(shop);
-  app.innerHTML=staffHead(shop,kind,KEY)+`<div id="staff"></div>`;
+  let st=null; try{ st=await rpc("urturn_staff_status",{p_slug:SLUG,p_key:KEY}); }catch(e){}
+  app.innerHTML=staffHead(shop,kind,KEY)+`<div class="wrap" style="padding-top:14px">${subBanner(st,shop,kind==="owner")}</div><div id="staff"></div>`;
+  setInterval(async()=>{ try{ const n=await rpc("urturn_staff_status",{p_slug:SLUG,p_key:KEY}); if(n&&st&&(n.locked!==st.locked||n.ends_at!==st.ends_at)) location.reload(); }catch(e){} },5*60000);
   app.querySelector("[data-lang]").addEventListener("click",()=>setLang(lang==="ar"?"en":"ar"));
+  if(kind==="cashier"&&st&&st.locked){ return; }
   if(kind==="cashier"){ $("#staff").className="wrap"; $("#staff").style.cssText="padding-block:20px;max-width:760px"; $("#staff").innerHTML=`<div id="cash"></div>`; Cashier($("#cash"),store,KEY); store.start(2000); keepAwake(); }
   else { Owner($("#staff"),store,KEY); store.start(10000); }
 }
