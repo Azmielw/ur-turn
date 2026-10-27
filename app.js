@@ -61,11 +61,11 @@ ar:{
  setupTitle:"التركيب بـ5 دقايق",
  su1:"الاسم والشعار",su2:"لون المحل",su3:"رابط تقييم جوجل",su4:"اطبع الستاند وحطه على الكاونتر",su5:"افتح شاشة الكاشير وجرّب طلب",
  adminTitle:"لوحة UR TURN",newShop:"محل جديد",slug:"معرّف الرابط (إنجليزي بدون مسافات)",slugPh:"مثلاً brew-lab",
- shopName:"اسم المحل",create:"إنشاء",created:"تم إنشاء المحل. احفظ الروابط، رابط الكاشير بيظهر مرة وحدة.",
+ shopName:"اسم المحل",create:"إنشاء",created:"جاهز! هاي روابط المحل. رابط الكاشير والإعدادات بيظهروا مرة وحدة، احفظهم أو ابعثهم لصاحب المحل.",
  shops:"المحلات",colShop:"المحل",colSlug:"المعرّف",colOrders:"طلبات 7 أيام",colRating:"التقييم",newKey:"رابط كاشير جديد",
  badLink:"الرابط غير صحيح أو منتهي. اطلب رابط جديد.",noShop:"ما لقينا هذا المحل. تأكد من الكود.",
  netErr:"في مشكلة بالاتصال، بنحاول مرة ثانية...",errGeneric:"صار خطأ، جرّب مرة ثانية.",
- badNumber:"اكتب أرقام بس."
+ badNumber:"اكتب أرقام بس.",editShop:"تعديل",edit:"تعديل",customColor:"أو اختار أي لون:",slugTaken:"هذا المعرّف مستخدم، اختار غيره."
 },
 en:{
  tabHome:"Home",tabDemo:"Live demo",
@@ -119,7 +119,7 @@ en:{
  shops:"Shops",colShop:"Shop",colSlug:"Id",colOrders:"Orders 7d",colRating:"Rating",newKey:"New cashier link",
  badLink:"This link is invalid or expired. Ask for a new one.",noShop:"We couldn't find this shop. Check the code.",
  netErr:"Connection problem, retrying...",errGeneric:"Something went wrong, try again.",
- badNumber:"Numbers only."
+ badNumber:"Numbers only.",editShop:"Edit",edit:"Edit",customColor:"Or pick any color:",slugTaken:"That id is taken, pick another."
 }};
 let lang="ar"; try{ lang=localStorage.getItem("urturn.lang")||"ar"; }catch(e){}
 const t=(k,...a)=>{ const v=(T[lang]||T.ar)[k]; return typeof v==="function"? v(...a) : (v ?? k); };
@@ -323,7 +323,8 @@ function Owner(root,store,key){
         <div class="field"><label>${t("fLogo")}</label><div class="logo-row"><div data-logo>${logoHTML(draft)}</div>
           <label class="btn small" for="o-logo" style="cursor:pointer">${t("upload")}</label><input type="file" id="o-logo" accept="image/*" hidden>
           <button type="button" class="btn small ghost" data-a="nologo">${t("removeLogo")}</button></div><small>${t("fLogoHint")}</small></div>
-        <div class="field"><label>${t("fColor")}</label><div class="swatches" data-sw>${sw()}</div></div>
+        <div class="field"><label>${t("fColor")}</label><div class="swatches" data-sw>${sw()}</div>
+          <label style="display:flex;gap:8px;align-items:center;font-weight:500;font-size:14px">${t("customColor")} <input type="color" id="o-color" value="${esc(draft.color)}" style="width:44px;height:34px;border:0;background:none;padding:0"></label></div>
         <div class="field"><label for="o-review">${t("fReview")}</label><input type="url" id="o-review" dir="ltr" value="${esc(draft.review_url||"")}"><small>${t("fReviewHint")}</small></div>
         <div class="field"><label for="o-welcome">${t("fWelcome")}</label><input type="text" id="o-welcome" maxlength="280" value="${esc(draft.welcome||"")}" placeholder="${esc(t("welcome"))}"></div>
         <div style="display:flex;gap:12px;align-items:center"><button class="btn primary" type="submit" ${locked?"disabled":""}>${t("save")}</button><span class="saved" data-saved hidden>${t("saved")}</span></div>
@@ -354,7 +355,7 @@ function Owner(root,store,key){
   }
   function readForm(){ draft.name=root.querySelector("#o-name").value.trim()||draft.name; draft.review_url=root.querySelector("#o-review").value.trim(); draft.welcome=root.querySelector("#o-welcome").value.trim(); }
   poster(); stats(); setInterval(stats,60000);
-  root.addEventListener("input",e=>{ if(e.target.id==="o-name"){ readForm(); poster(); } });
+  root.addEventListener("input",e=>{ if(e.target.id==="o-name"){ readForm(); poster(); } if(e.target.id==="o-color"){ draft.color=e.target.value; root.querySelector("[data-sw]").innerHTML=sw(); poster(); applyShop(draft); } });
   root.addEventListener("change",e=>{
     if(e.target.id!=="o-logo"||!e.target.files[0]) return;
     const fr=new FileReader();
@@ -377,36 +378,99 @@ function Owner(root,store,key){
 
 // ---------- admin ----------
 function Admin(root,akey){
-  root.innerHTML=`<div class="wrap" style="padding-block:20px;max-width:860px;display:grid;gap:16px">
-    <div class="panel"><div class="panel-head"><h2>${t("newShop")}</h2></div>
-      <form class="form" data-f="new"><div class="field"><label for="a-name">${t("shopName")}</label><input type="text" id="a-name" required maxlength="80" style="border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg)"></div>
-      <div class="field"><label for="a-slug">${t("slug")}</label><input type="text" id="a-slug" required dir="ltr" pattern="[a-z0-9-]{2,40}" placeholder="${t("slugPh")}" style="border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg)"></div>
-      <button class="btn primary" type="submit">${t("create")}</button></form>
-      <div data-result></div></div>
-    <div class="panel"><div class="panel-head"><h2>${t("shops")}</h2></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>${t("colShop")}</th><th>${t("colSlug")}</th><th>${t("colOrders")}</th><th>${t("colRating")}</th><th></th></tr></thead><tbody data-rows></tbody></table></div></div>
+  const COLORS=["#0E5E5A","#7A2E1F","#1E3A8A","#3F3A33","#8A1C4A","#2F6B2A","#B45309","#14181C"];
+  const blank=()=>({slug:"",name:"",color:"#0E5E5A",logo:null,review_url:"",welcome:""});
+  let mode="new", draft=blank();
+  const inputCss="border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg);width:100%";
+  root.innerHTML=`<div class="wrap owner">
+    <div style="display:grid;gap:16px;min-width:0">
+      <div class="panel"><div class="panel-head"><h2 data-title></h2><button class="btn small ghost" type="button" data-a="new" hidden>+ ${t("newShop")}</button></div>
+        <form class="form" data-f="shop">
+          <div class="field"><label for="a-name">${t("shopName")}</label><input type="text" id="a-name" required maxlength="80" style="${inputCss}"></div>
+          <div class="field" data-slugf><label for="a-slug">${t("slug")}</label><input type="text" id="a-slug" dir="ltr" pattern="[a-z0-9\\-]{2,40}" placeholder="${t("slugPh")}" style="${inputCss}"></div>
+          <div class="field"><label>${t("fLogo")}</label><div class="logo-row"><div data-logo></div>
+            <label class="btn small" for="a-logo" style="cursor:pointer">${t("upload")}</label><input type="file" id="a-logo" accept="image/*" hidden>
+            <button type="button" class="btn small ghost" data-a="nologo">${t("removeLogo")}</button></div></div>
+          <div class="field"><label>${t("fColor")}</label><div class="swatches" data-sw></div>
+            <label style="display:flex;gap:8px;align-items:center;font-weight:500;font-size:14px">${t("customColor")} <input type="color" id="a-color" style="width:44px;height:34px;border:0;background:none;padding:0"></label></div>
+          <div class="field"><label for="a-review">${t("fReview")}</label><input type="url" id="a-review" dir="ltr" placeholder="https://g.page/r/..." style="${inputCss}"><small>${t("fReviewHint")}</small></div>
+          <div class="field"><label for="a-welcome">${t("fWelcome")}</label><input type="text" id="a-welcome" maxlength="280" placeholder="${esc(t("welcome"))}" style="${inputCss}"></div>
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn primary" type="submit" data-submit></button><span class="saved" data-saved hidden>${t("saved")}</span></div>
+        </form>
+        <div data-result></div></div>
+      <div class="panel"><div class="panel-head"><h2>${t("shops")}</h2></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>${t("colShop")}</th><th>${t("colSlug")}</th><th>${t("colOrders")}</th><th>${t("colRating")}</th><th></th></tr></thead><tbody data-rows></tbody></table></div></div>
+    </div>
+    <div style="display:grid;gap:16px;align-content:start"><div><div class="label">${t("posterTitle")}</div><div class="poster" data-poster></div></div>
+      <div class="panel links" data-custbox hidden><label>${t("custLink")}</label><div class="copy-row"><input id="a-cust" readonly><button class="btn small" type="button" data-copy="a-cust">${t("copy")}</button></div></div></div>
   </div>`;
+  const $r=s=>root.querySelector(s);
+  copyBtn($r('[data-copy="a-cust"]'),$r("#a-cust"));
+  const curSlug=()=> mode==="edit"?draft.slug:($r("#a-slug").value.trim().toLowerCase()||"your-shop");
+  function swatches(){ $r("[data-sw]").innerHTML=COLORS.map(c=>`<button type="button" class="swatch" style="background:${c}" data-color="${c}" aria-label="${c}" aria-pressed="${draft.color===c}"></button>`).join(""); $r("#a-color").value=draft.color; }
+  function poster(){
+    const p=$r("[data-poster]"); p.style.setProperty("--shop",draft.color); p.style.setProperty("--shop-ink",inkFor(draft.color));
+    const name=draft.name||t("shopName");
+    p.innerHTML=`${logoHTML({...draft,name},`style="color:${esc(draft.color)}"`)}<h3>${t("posterH")}</h3><div class="qr">${qrSVG(custURL(curSlug()))}</div><p>${t("posterP")}</p><b>${esc(name)}</b><span class="ur">UR TURN</span>`;
+    $r("[data-logo]").innerHTML=logoHTML({...draft,name},`style="color:${esc(draft.color)}"`);
+    const cb=$r("[data-custbox]"); cb.hidden=!(mode==="edit"); $r("#a-cust").value=custURL(curSlug());
+  }
+  function fill(){
+    $r("[data-title]").textContent= mode==="edit"? t("editShop")+": "+draft.name : t("newShop");
+    $r("[data-a=new]").hidden= mode!=="edit";
+    $r("[data-slugf]").hidden= mode==="edit"; $r("#a-slug").required= mode!=="edit";
+    $r("[data-submit]").textContent= mode==="edit"? t("save") : t("create");
+    $r("#a-name").value=draft.name||""; $r("#a-slug").value=mode==="edit"?draft.slug:""; $r("#a-review").value=draft.review_url||""; $r("#a-welcome").value=draft.welcome||"";
+    swatches(); poster();
+  }
+  function read(){ draft.name=$r("#a-name").value.trim(); draft.review_url=$r("#a-review").value.trim(); draft.welcome=$r("#a-welcome").value.trim(); }
   function showLinks(slug,k){
-    const box=root.querySelector("[data-result]");
+    const box=$r("[data-result]");
     box.innerHTML=`<div class="tip" style="margin-top:14px">${t("created")}</div><div class="links" style="margin-top:12px">
-      ${[["custLink",custURL(slug)],["cashLink",cashURL(slug,k)],["ownLink",ownURL(slug,k)]].map(([l,u],i)=>`<div><label>${t(l)}</label><div class="copy-row"><input id="al${i}" readonly value="${esc(u)}"><button class="btn small" type="button" data-copy="al${i}">${t("copy")}</button></div></div>`).join("")}</div>`;
-    box.querySelectorAll("[data-copy]").forEach(b=>copyBtn(b,box.querySelector("#"+b.dataset.copy)));
-    box.scrollIntoView({behavior:"smooth"});
+      ${[["custLink",custURL(slug)],["cashLink",cashURL(slug,k)],["ownLink",ownURL(slug,k)]].map(([l,u],i)=>`<div><label>${t(l)}</label><div class="copy-row"><input id="al${i}" readonly value="${esc(u)}"><button class="btn small" type="button" data-copy2="al${i}">${t("copy")}</button></div></div>`).join("")}</div>`;
+    box.querySelectorAll("[data-copy2]").forEach(b=>copyBtn(b,box.querySelector("#"+b.dataset.copy2)));
+    box.scrollIntoView({behavior:"smooth",block:"center"});
   }
   async function load(){
     try{ const rows=await rpc("urturn_admin_shops",{p_admin:akey});
-      root.querySelector("[data-rows]").innerHTML=rows.map(r=>`<tr><td>${esc(r.name)}</td><td dir="ltr"><a href="${esc(custURL(r.slug))}" target="_blank" rel="noopener">${esc(r.slug)}</a></td><td>${r.orders_7d}</td><td>${r.avg_rating??"–"}</td><td><button class="btn small" data-reset="${esc(r.slug)}" type="button">${t("newKey")}</button></td></tr>`).join("");
+      $r("[data-rows]").innerHTML=rows.map(r=>`<tr><td>${esc(r.name)}</td><td dir="ltr"><a href="${esc(custURL(r.slug))}" target="_blank" rel="noopener">${esc(r.slug)}</a></td><td>${r.orders_7d}</td><td>${r.avg_rating??"–"}</td>
+        <td style="display:flex;gap:6px"><button class="btn small" data-edit="${esc(r.slug)}" type="button">${t("edit")}</button><button class="btn small ghost" data-reset="${esc(r.slug)}" type="button">${t("newKey")}</button></td></tr>`).join("");
     }catch(e){ root.innerHTML=`<div class="center-msg"><h2>${t("badLink")}</h2></div>`; }
   }
+  root.addEventListener("input",e=>{ if(["a-name","a-slug"].includes(e.target.id)){ read(); poster(); } if(e.target.id==="a-color"){ draft.color=e.target.value; swatches(); poster(); } });
+  root.addEventListener("change",e=>{
+    if(e.target.id!=="a-logo"||!e.target.files[0]) return;
+    const fr=new FileReader();
+    fr.onload=()=>{ const img=new Image(); img.onload=()=>{ const c=document.createElement("canvas"),S=200; c.width=S;c.height=S; const x=c.getContext("2d"); const m=Math.min(img.width,img.height);
+      x.fillStyle="#fff"; x.fillRect(0,0,S,S); x.drawImage(img,(img.width-m)/2,(img.height-m)/2,m,m,0,0,S,S); draft.logo=c.toDataURL("image/jpeg",0.85); poster(); }; img.src=fr.result; };
+    fr.readAsDataURL(e.target.files[0]);
+  });
   root.addEventListener("submit",async e=>{
-    e.preventDefault(); const name=root.querySelector("#a-name").value.trim(), slug=root.querySelector("#a-slug").value.trim().toLowerCase();
-    try{ const k=await rpc("urturn_admin_create_shop",{p_admin:akey,p_slug:slug,p_name:name}); showLinks(slug,k); e.target.reset(); load(); }
-    catch(err){ toast(t("errGeneric")+" ("+esc(err.code||"")+")"); }
+    e.preventDefault(); read();
+    const args={p_admin:akey,p_name:draft.name,p_color:draft.color,p_logo:draft.logo||"",p_review_url:draft.review_url||"",p_welcome:draft.welcome||""};
+    try{
+      if(mode==="new"){
+        const slug=$r("#a-slug").value.trim().toLowerCase();
+        const k=await rpc("urturn_admin_create_shop",{p_admin:akey,p_slug:slug,p_name:draft.name});
+        await rpc("urturn_admin_save_shop",{...args,p_slug:slug});
+        draft.slug=slug; mode="edit"; fill(); showLinks(slug,k);
+      } else {
+        await rpc("urturn_admin_save_shop",{...args,p_slug:draft.slug});
+        const s=$r("[data-saved]"); s.hidden=false; setTimeout(()=>s.hidden=true,2500); fill();
+      }
+      load();
+    }catch(err){ toast(String(err.code||"").includes("duplicate")?t("slugTaken"):t("errGeneric")); }
   });
   root.addEventListener("click",async e=>{
+    const sw=e.target.closest("[data-color]"); if(sw){ draft.color=sw.dataset.color; swatches(); poster(); return; }
+    const a=e.target.closest("[data-a]");
+    if(a&&a.dataset.a==="nologo"){ draft.logo=null; poster(); return; }
+    if(a&&a.dataset.a==="new"){ mode="new"; draft=blank(); $r("[data-result]").innerHTML=""; fill(); return; }
+    const ed=e.target.closest("[data-edit]");
+    if(ed){ const s=await loadShop(ed.dataset.edit); if(s){ draft={...s}; mode="edit"; $r("[data-result]").innerHTML=""; fill(); root.scrollIntoView({behavior:"smooth"}); } return; }
     const b=e.target.closest("[data-reset]"); if(!b) return;
-    try{ const k=await rpc("urturn_admin_reset_key",{p_admin:akey,p_slug:b.dataset.reset}); showLinks(b.dataset.reset,k); }catch(err){ toast(t("errGeneric")); }
+    try{ const k=await rpc("urturn_admin_reset_key",{p_admin:akey,p_slug:b.dataset.reset}); const s=await loadShop(b.dataset.reset); if(s){ draft={...s}; mode="edit"; fill(); } showLinks(b.dataset.reset,k); }catch(err){ toast(t("errGeneric")); }
   });
-  load();
+  fill(); load();
 }
 
 // ---------- pages ----------
@@ -475,7 +539,7 @@ $("#langBtn").textContent=lang==="ar"?"English":"العربية";
 $("#langBtn").addEventListener("click",()=>setLang(lang==="ar"?"en":"ar"));
 if(VIEW==="home") homePage();
 else if(VIEW==="demo") demoPage();
-else if(VIEW==="admin"){ topbar(""); Admin(app,KEY); }
+else if(VIEW==="admin"){ topbar(""); document.title="Admin · UR TURN"; Admin(app,KEY); }
 else if(VIEW==="cashier"||VIEW==="owner") staffPage(VIEW);
 else customerPage();
 })();
