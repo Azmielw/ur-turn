@@ -4,6 +4,7 @@
 const SUPA_URL = "https://exfxqtgcvbfpvgiykupk.supabase.co";
 const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4ZnhxdGdjdmJmcHZnaXlrdXBrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4NzgzNjQsImV4cCI6MjA5MDQ1NDM2NH0.cCqvsJ1fgZ4xs0x-q57iHIjbpwrBBO8GvZ1X2h-6LBo";
 const DEMO_SLUG = "demo";
+const OUR_WA = "+201055602979"; // UR TURN sales WhatsApp
 const DEMO_KEY = "7d4ff772fa0a253cfabc7855"; // demo shop only: settings are locked on the server
 const BASE = location.origin + location.pathname.replace(/index\.html$/,"");
 const P = new URLSearchParams(location.search);
@@ -31,7 +32,7 @@ ar:{
  whyTitle:"ليش UR TURN",
  w1:"ما في أجهزة بيجر تنكسر أو تضيع أو تحتاج شحن.",w2:"تقييمات أكثر على جوجل لأننا نطلبها لحظة الاستلام.",
  w3:"يشتغل مع أي كاشير، والكاشير شغله زر واحد.",w4:"كل محل باسمه وشعاره ولونه ورابطه.",
- trialTitle:"أسبوع تجربة مجاني",trialP:"التركيب بياخذ 5 دقايق. المحل بيجرّب النظام أسبوع كامل ببلاش، وبعدين بنحدد السعر سوا حسب النتيجة.",
+ trialTitle:"أسبوع تجربة مجاني",trialQr:"امسح الكود وكلّمنا واتساب 👇",trialWaMsg:"مرحبا، شفت UR TURN وبدي أجرّبه أسبوع ببلاش بمحلي.",trialWaBtn:"تواصل معنا واتساب",trialP:"التركيب بياخذ 5 دقايق. المحل بيجرّب النظام أسبوع كامل ببلاش، وبعدين بنحدد السعر سوا حسب النتيجة.",
  demoHint:"اكتب رقم فاتورة بجوال الزبون، بعدين اضغط «جاهز» من شاشة الكاشير. وجرّب كمان تفتح صفحة الزبون من جوال ثاني.",
  customerPhone:"جوال الزبون",
  welcome:"أهلاً فيك! اكتب رقم الفاتورة وخلّيك مرتاح، رح نبلغك لما يجهز طلبك.",
@@ -98,7 +99,7 @@ en:{
  whyTitle:"Why UR TURN",
  w1:"No pager devices to break, lose or charge.",w2:"More Google reviews, asked for at pickup.",
  w3:"Works with any cashier; one button to use.",w4:"Each shop with its own name, logo, color and link.",
- trialTitle:"Free first week",trialP:"Setup takes 5 minutes. The shop tries it free for a full week, then we agree on a price together.",
+ trialTitle:"Free first week",trialQr:"Scan to message us on WhatsApp 👇",trialWaMsg:"Hi, I saw UR TURN and would like the free 1-week trial for my shop.",trialWaBtn:"Message us on WhatsApp",trialP:"Setup takes 5 minutes. The shop tries it free for a full week, then we agree on a price together.",
  demoHint:"Enter a receipt number on the customer phone, then tap “Ready” on the cashier screen. Also try opening the customer page on another phone.",
  customerPhone:"Customer phone",
  welcome:"Welcome! Enter your receipt number and relax. We'll alert you when your order is ready.",
@@ -562,7 +563,7 @@ function homePage(){
       <a class="screen-card" href="${esc(custURL(DEMO_SLUG))}" target="_blank" rel="noopener"><b>${t("scCust")}</b><span>${t("scCustP")}</span><i>${t("open")}</i></a>
       <a class="screen-card" href="${esc(cashURL(DEMO_SLUG,DEMO_KEY))}" target="_blank" rel="noopener"><b>${t("scCash")}</b><span>${t("scCashP")}</span><i>${t("open")}</i></a></div></section>
     <section class="section cols"><div><h2>${t("whyTitle")}</h2><ul class="list">${[1,2,3,4].map(i=>`<li>${t("w"+i)}</li>`).join("")}</ul></div>
-      <div class="trial"><h2>${t("trialTitle")}</h2><p>${t("trialP")}</p><div class="qr" style="background:#fff;padding:10px;border-radius:12px;width:max-content;margin-top:8px">${qrSVG(custURL(DEMO_SLUG))}</div></div></section>
+      <div class="trial"><h2>${t("trialTitle")}</h2><p>${t("trialP")}</p><p style="font-weight:600;margin-top:10px">${t("trialQr")}</p><div class="qr" style="background:#fff;padding:10px;border-radius:12px;width:max-content;margin-top:8px">${qrSVG(waLink(OUR_WA,t("trialWaMsg")))}</div><a class="btn signal" style="margin-top:12px" href="${esc(waLink(OUR_WA,t("trialWaMsg")))}" target="_blank" rel="noopener">${t("trialWaBtn")}</a></div></section>
   </div>`;
 }
 async function loadShop(slug){ try{ return await Api.shop(slug); }catch(e){ return undefined; } }
